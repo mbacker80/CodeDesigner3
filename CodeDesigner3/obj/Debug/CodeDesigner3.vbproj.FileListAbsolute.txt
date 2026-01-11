@@ -10,7 +10,6 @@ c:\users\dom\documents\visual studio 2015\Projects\CodeDesigner3\CodeDesigner3\o
 c:\users\dom\documents\visual studio 2015\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.xml
 c:\users\dom\documents\visual studio 2015\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.pdb
 C:\Users\Dom\Documents\Visual Studio 2015\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmNewItem.resources
-C:\Users\Dom\Documents\Visual Studio 2015\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.vbprojResolveAssemblyReference.cache
 C:\Users\Dom\Documents\Visual Studio 2015\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmBuildLibrary.resources
 C:\Users\Dom\Documents\Visual Studio 2015\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmBuildArchive.resources
 C:\Users\Dom\Documents\Visual Studio 2015\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmFindReplaceGoto.resources
@@ -21,3 +20,81 @@ C:\Users\Dom\Documents\Visual Studio 2015\Projects\CodeDesigner3\CodeDesigner3\o
 C:\Users\Dom\Documents\Visual Studio 2015\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmPS2Controller.resources
 C:\Users\Dom\Documents\Visual Studio 2015\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmHexTools.resources
 C:\Users\Dom\Documents\Visual Studio 2015\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmValueConverter.resources
+C:\Users\Dom\Documents\Visual Studio 2015\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.vbprojAssemblyReference.cache
+C:\Users\Dom\Documents\Visual Studio 2015\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.vbproj.CoreCompileInputs.cache
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\bin\Debug\CodeDesigner3.exe.config
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\bin\Debug\CodeDesigner3.exe
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\bin\Debug\CodeDesigner3.pdb
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\bin\Debug\CodeDesigner3.xml
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.vbprojAssemblyReference.cache
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmBuildArchive.resources
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmBuildLibrary.resources
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmExtract.resources
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmFindReplaceGoto.resources
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmHexTools.resources
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmInject.resources
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmMain.resources
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmNewItem.resources
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmPS2Controller.resources
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmSettings.resources
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmValueConverter.resources
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.Resources.resources
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.RAMView.resources
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.SyntaxView.resources
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.vbproj.GenerateResource.cache
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.vbproj.CoreCompileInputs.cache
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.exe
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.xml
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.pdb
+C:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmEmulator.resources
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.vbproj.AssemblyReference.cache
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.vbproj.SuggestedBindingRedirects.cache
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmBuildArchive.resources
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmBuildLibrary.resources
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmEmulator.resources
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmExtract.resources
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmFindReplaceGoto.resources
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmHexTools.resources
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmInject.resources
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmMain.resources
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmNewItem.resources
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmPS2Controller.resources
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmSettings.resources
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmValueConverter.resources
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.Resources.resources
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.RAMView.resources
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.SyntaxView.resources
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.vbproj.GenerateResource.cache
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.vbproj.CoreCompileInputs.cache
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.exe
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.xml
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.pdb
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\bin\Debug\CodeDesigner3.exe.config
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\bin\Debug\CodeDesigner3.exe
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\bin\Debug\CodeDesigner3.pdb
+F:\Users\judge\Documents\Visual Studio 2019\Projects\CodeDesigner3\CodeDesigner3\bin\Debug\CodeDesigner3.xml
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\bin\Debug\CodeDesigner3.exe.config
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\bin\Debug\CodeDesigner3.exe
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\bin\Debug\CodeDesigner3.pdb
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\bin\Debug\CodeDesigner3.xml
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.vbproj.AssemblyReference.cache
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmBuildArchive.resources
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmBuildLibrary.resources
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmEmulator.resources
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmExtract.resources
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmFindReplaceGoto.resources
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmHexTools.resources
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmInject.resources
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmMain.resources
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmNewItem.resources
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmPS2Controller.resources
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmSettings.resources
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.frmValueConverter.resources
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.Resources.resources
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.RAMView.resources
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.SyntaxView.resources
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.vbproj.GenerateResource.cache
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.vbproj.CoreCompileInputs.cache
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.exe
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.xml
+G:\BACKUP\ASUS_LAPTOP\Projects\CodeDesigner3\CodeDesigner3\obj\Debug\CodeDesigner3.pdb

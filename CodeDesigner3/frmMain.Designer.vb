@@ -93,6 +93,11 @@ Partial Class frmMain
         Me.CreateFromDocumentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ManageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ValueConverterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HexTextConverterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ControllerValuesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PS2ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.txtCodeOutput = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -111,11 +116,6 @@ Partial Class frmMain
         Me.RemoveToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
         Me.SaveToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ValueConverterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HexTextConverterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ControllerValuesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PS2ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SyntaxView1 = New CodeDesigner3.SyntaxView()
         Me.MenuStrip1.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
@@ -373,7 +373,7 @@ Partial Class frmMain
         '
         Me.SelectedFileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EntireProjectToolStripMenuItem1, Me.SelectedFileToolStripMenuItem2})
         Me.SelectedFileToolStripMenuItem.Name = "SelectedFileToolStripMenuItem"
-        Me.SelectedFileToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.SelectedFileToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
         Me.SelectedFileToolStripMenuItem.Text = "Compile"
         '
         'EntireProjectToolStripMenuItem1
@@ -391,10 +391,9 @@ Partial Class frmMain
         'EntireProjectToolStripMenuItem
         '
         Me.EntireProjectToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SelectedFileToolStripMenuItem3, Me.EntireProjectToolStripMenuItem2})
-        Me.EntireProjectToolStripMenuItem.Enabled = False
         Me.EntireProjectToolStripMenuItem.Name = "EntireProjectToolStripMenuItem"
-        Me.EntireProjectToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
-        Me.EntireProjectToolStripMenuItem.Text = "Debugger"
+        Me.EntireProjectToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.EntireProjectToolStripMenuItem.Text = "Emulator"
         '
         'SelectedFileToolStripMenuItem3
         '
@@ -448,7 +447,7 @@ Partial Class frmMain
         '
         Me.ImportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RAWToolStripMenuItem, Me.FileExtractToolStripMenuItem})
         Me.ImportToolStripMenuItem.Name = "ImportToolStripMenuItem"
-        Me.ImportToolStripMenuItem.Size = New System.Drawing.Size(118, 22)
+        Me.ImportToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ImportToolStripMenuItem.Text = "Import"
         '
         'RAWToolStripMenuItem
@@ -467,13 +466,12 @@ Partial Class frmMain
         '
         Me.ExportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ELFToolStripMenuItem, Me.RAWToolStripMenuItem1, Me.CToolStripMenuItem, Me.FileInjectToolStripMenuItem})
         Me.ExportToolStripMenuItem.Name = "ExportToolStripMenuItem"
-        Me.ExportToolStripMenuItem.Size = New System.Drawing.Size(118, 22)
+        Me.ExportToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ExportToolStripMenuItem.Text = "Export"
         '
         'ELFToolStripMenuItem
         '
         Me.ELFToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EntireProjectToolStripMenuItem3, Me.CurrentDocumentToolStripMenuItem})
-        Me.ELFToolStripMenuItem.Enabled = False
         Me.ELFToolStripMenuItem.Name = "ELFToolStripMenuItem"
         Me.ELFToolStripMenuItem.Size = New System.Drawing.Size(124, 22)
         Me.ELFToolStripMenuItem.Text = ".ELF"
@@ -551,13 +549,13 @@ Partial Class frmMain
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(115, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
         '
         'LibrariesToolStripMenuItem
         '
         Me.LibrariesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreateFromProjectToolStripMenuItem, Me.CreateFromDocumentToolStripMenuItem, Me.ManageToolStripMenuItem})
         Me.LibrariesToolStripMenuItem.Name = "LibrariesToolStripMenuItem"
-        Me.LibrariesToolStripMenuItem.Size = New System.Drawing.Size(118, 22)
+        Me.LibrariesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.LibrariesToolStripMenuItem.Text = "Libraries"
         '
         'CreateFromProjectToolStripMenuItem
@@ -574,7 +572,6 @@ Partial Class frmMain
         '
         'ManageToolStripMenuItem
         '
-        Me.ManageToolStripMenuItem.Enabled = False
         Me.ManageToolStripMenuItem.Name = "ManageToolStripMenuItem"
         Me.ManageToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
         Me.ManageToolStripMenuItem.Text = "Manage"
@@ -582,8 +579,40 @@ Partial Class frmMain
         'SettingsToolStripMenuItem
         '
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(118, 22)
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.SettingsToolStripMenuItem.Text = "Settings"
+        '
+        'ToolsToolStripMenuItem
+        '
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ValueConverterToolStripMenuItem, Me.HexTextConverterToolStripMenuItem, Me.ControllerValuesToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
+        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
+        Me.ToolsToolStripMenuItem.Text = "Tools"
+        '
+        'ValueConverterToolStripMenuItem
+        '
+        Me.ValueConverterToolStripMenuItem.Name = "ValueConverterToolStripMenuItem"
+        Me.ValueConverterToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
+        Me.ValueConverterToolStripMenuItem.Text = "Value Converter"
+        '
+        'HexTextConverterToolStripMenuItem
+        '
+        Me.HexTextConverterToolStripMenuItem.Name = "HexTextConverterToolStripMenuItem"
+        Me.HexTextConverterToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
+        Me.HexTextConverterToolStripMenuItem.Text = "Hex / Text Converter"
+        '
+        'ControllerValuesToolStripMenuItem
+        '
+        Me.ControllerValuesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PS2ToolStripMenuItem})
+        Me.ControllerValuesToolStripMenuItem.Name = "ControllerValuesToolStripMenuItem"
+        Me.ControllerValuesToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
+        Me.ControllerValuesToolStripMenuItem.Text = "Controller Values"
+        '
+        'PS2ToolStripMenuItem
+        '
+        Me.PS2ToolStripMenuItem.Name = "PS2ToolStripMenuItem"
+        Me.PS2ToolStripMenuItem.Size = New System.Drawing.Size(93, 22)
+        Me.PS2ToolStripMenuItem.Text = "PS2"
         '
         'txtCodeOutput
         '
@@ -714,38 +743,6 @@ Partial Class frmMain
         Me.SaveToolStripMenuItem3.Name = "SaveToolStripMenuItem3"
         Me.SaveToolStripMenuItem3.Size = New System.Drawing.Size(139, 22)
         Me.SaveToolStripMenuItem3.Text = "Save"
-        '
-        'ToolsToolStripMenuItem
-        '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ValueConverterToolStripMenuItem, Me.HexTextConverterToolStripMenuItem, Me.ControllerValuesToolStripMenuItem})
-        Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
-        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
-        Me.ToolsToolStripMenuItem.Text = "Tools"
-        '
-        'ValueConverterToolStripMenuItem
-        '
-        Me.ValueConverterToolStripMenuItem.Name = "ValueConverterToolStripMenuItem"
-        Me.ValueConverterToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
-        Me.ValueConverterToolStripMenuItem.Text = "Value Converter"
-        '
-        'HexTextConverterToolStripMenuItem
-        '
-        Me.HexTextConverterToolStripMenuItem.Name = "HexTextConverterToolStripMenuItem"
-        Me.HexTextConverterToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
-        Me.HexTextConverterToolStripMenuItem.Text = "Hex / Text Converter"
-        '
-        'ControllerValuesToolStripMenuItem
-        '
-        Me.ControllerValuesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PS2ToolStripMenuItem})
-        Me.ControllerValuesToolStripMenuItem.Name = "ControllerValuesToolStripMenuItem"
-        Me.ControllerValuesToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
-        Me.ControllerValuesToolStripMenuItem.Text = "Controller Values"
-        '
-        'PS2ToolStripMenuItem
-        '
-        Me.PS2ToolStripMenuItem.Name = "PS2ToolStripMenuItem"
-        Me.PS2ToolStripMenuItem.Size = New System.Drawing.Size(93, 22)
-        Me.PS2ToolStripMenuItem.Text = "PS2"
         '
         'SyntaxView1
         '

@@ -1455,7 +1455,7 @@ startFromTop:
             W = StrWidth(Strings.Left(AllLines(CurLine), CurPos))
             W += MarginWidth
 
-            XY.X = W + 4
+            XY.X = W + 0
             XY.Y = (SVFont.Height * (CurLine - RenderStart)) + 2
             BlinkerXY.X = XY.X
             BlinkerXY.Y = XY.Y
@@ -1486,7 +1486,8 @@ startFromTop:
     Private Function StrWidth(Str As String) As Integer
         Dim SzF As SizeF, SzF2 As SizeF
 
-        SzF = GFX.MeasureString(Replace(Replace(Str, " ", "_"), vbTab, "    ") + "I", SVFont)
+        SzF = GFX.MeasureString(Replace(Replace(Str, vbTab, "    "), " ", "X") + "X", SVFont)
+        'SzF = GFX.MeasureString(New String("X", Len(Str)) + "I", SVFont)
         SzF2 = GFX.MeasureString("I", SVFont)
         Return SzF.Width - SzF2.Width
     End Function
@@ -1512,7 +1513,9 @@ startFromTop:
                 I = 0
                 Do
                     SzF = GFX.MeasureString(Strings.Left(AllLines(YSel), I), SVFont)
+                    'SzF = GFX.MeasureString(Replace(Replace(Strings.Left(AllLines(YSel), I), " ", "_"), vbTab, "    "), SVFont)
                     SzF2 = GFX.MeasureString(Strings.Left(AllLines(YSel), I + 1), SVFont)
+                    'SzF2 = GFX.MeasureString(Replace(Replace(Strings.Left(AllLines(YSel), I + 1), " ", "_"), vbTab, "    "), SVFont)
 
                     If (SzF.Width + MarginWidth) < e.X Then
                         If SzF2.Width + MarginWidth >= e.X Then

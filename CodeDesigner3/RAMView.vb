@@ -71,6 +71,7 @@
         End Get
         Set(newPos As Int64)
             CurLine = newPos
+            ReturnToCursor()
         End Set
     End Property
 
@@ -186,6 +187,10 @@
     End Function
 
     Private Sub RAMView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If (Me.DesignMode) Then
+            Exit Sub
+        End If
+
         Me.DoubleBuffered = True
 
         EnableSyntaxHL = True

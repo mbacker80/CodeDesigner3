@@ -171,6 +171,7 @@ Public Class frmMain
             "*/" + vbCrLf + vbCrLf
 
         Me.Text = "Code Designer 3 (Classic Mode) ~ Created by: Gtlcpimp"
+
     End Sub
 
     Private Sub frmMain_Resize(sender As Object, e As EventArgs) Handles Me.Resize
@@ -1126,6 +1127,209 @@ Public Class frmMain
     Private Sub ValueConverterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ValueConverterToolStripMenuItem.Click
         Dim vc As New frmValueConverter
         vc.Show()
+    End Sub
+
+    Private Sub CurrentDocumentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CurrentDocumentToolStripMenuItem.Click
+
+        Dim txtData As String, ret As String, rt As Integer
+
+        txtCodeOutput.Text = ""
+        DebugOut("Compiling file...")
+
+        txtData = SyntaxView1.TxtSource
+
+        If IsProject Then
+            rt = MyProject.SetCDS(MyFile, txtData)
+        End If
+
+        rt = mpCom.CompileSingle(txtData, ret, False)
+        If rt < 0 Then
+            DebugOut("Compiler Error! Cannot export ELF until all errors are fixed.")
+            HandleError(0)
+        Else
+            'txtCodeOutput.Text = ret
+            DebugOut("Compile complete, preparing ELF...")
+
+            Dim CDElf As New ELF, i As Integer
+            CDElf.Init(AddressOf DebugOut)
+            CDElf.SetEntry(mpCom.ElfCfg.Entry)
+            CDElf.AppendCode(ret)
+            For i = 0 To mpCom.ElfCfg.ResourceCount
+                CDElf.AddFile(mpCom.ElfCfg.Resources(i).Offset, mpCom.ElfCfg.Resources(i).Data)
+            Next
+
+            With SaveFileDialog1
+                .FileName = ""
+                .Filter = "ELF File|*.elf"
+                rt = .ShowDialog
+                If rt = 2 Then Exit Sub
+
+                If CDElf.SaveELF(.FileName) Then
+                    DebugOut("Exported ELF to '" + .FileName + "' successfully!")
+                Else
+                    DebugOut("ELF Export Failed")
+                End If
+            End With
+
+        End If
+
+        GC.Collect()
+    End Sub
+
+    Private Sub EntireProjectToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles EntireProjectToolStripMenuItem3.Click
+        If IsProject = False Then
+            MsgBox("Not currently in project mode")
+            Exit Sub
+        End If
+        Dim Code As String, rt As Integer, FS As System.IO.FileStream, Bytes() As Byte
+
+        If CompileProject(Code) < 0 Then
+            MsgBox("Cannot export ELF until all" + vbCrLf +
+                   "errors are corrected.", vbOKOnly, "RAW Export")
+        Else
+            DebugOut("Compile complete, preparing ELF...")
+
+            Dim CDElf As New ELF, i As Integer
+            CDElf.Init(AddressOf DebugOut)
+            CDElf.SetEntry(mpCom.ElfCfg.Entry)
+            CDElf.AppendCode(Code)
+            For i = 0 To mpCom.ElfCfg.ResourceCount
+                CDElf.AddFile(mpCom.ElfCfg.Resources(i).Offset, mpCom.ElfCfg.Resources(i).Data)
+            Next
+
+            With SaveFileDialog1
+                .FileName = ""
+                .Filter = "ELF File|*.elf"
+                rt = .ShowDialog
+                If rt = 2 Then Exit Sub
+
+                If CDElf.SaveELF(.FileName) Then
+                    DebugOut("Exported ELF to '" + .FileName + "' successfully!")
+                Else
+                    DebugOut("ELF Export Failed")
+                End If
+            End With
+
+        End If
+    End Sub
+
+    Private Sub SelectedFileToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles SelectedFileToolStripMenuItem3.Click
+        Dim txtData As String, ret As String, rt As Integer, Lines() As String, sp() As String
+
+        txtCodeOutput.Text = ""
+        DebugOut("Compiling file...")
+
+        txtData = SyntaxView1.TxtSource
+
+        If IsProject Then
+            rt = MyProject.SetCDS(MyFile, txtData)
+        End If
+
+        rt = mpCom.CompileSingle(txtData, ret, False)
+        If rt < 0 Then
+            DebugOut("Compiler Error!")
+            HandleError(0)
+        Else
+            Dim Addrs() As UInt32, Datas() As UInt32, i As Integer, b As Integer
+
+            DebugOut("Compile completed.")
+            If ret = "" Then Exit Sub
+            If ret = vbCrLf Then Exit Sub
+
+            ReDim Addrs(0)
+            ReDim Datas(0)
+            b = -1
+            Lines = Split(ret + vbCrLf, vbCrLf)
+            For i = 0 To Lines.Count - 1
+                sp = Split(Lines(i) + " ", " ")
+                If sp(1) <> "" Then
+                    b += 1
+                    ReDim Preserve Addrs(b)
+                    ReDim Preserve Datas(b)
+                    Addrs(b) = Convert.ToUInt32(Strings.Right(sp(0), 7), 16)
+                    Datas(b) = Convert.ToUInt32(sp(1), 16)
+                End If
+            Next
+
+
+            Dim EMU As New frmEmulator
+            EMU.Show()
+            EMU.SetAsm(mpAsm, mpCom)
+
+            EMU.SetCode(Addrs, Datas)
+        End If
+
+        GC.Collect()
+    End Sub
+
+    Private Sub EntireProjectToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles EntireProjectToolStripMenuItem2.Click
+        If IsProject = False Then
+            MsgBox("Not currently in project mode")
+            Exit Sub
+        End If
+
+        Dim i As Integer, fileDatas() As String, fileNames() As String, rt As Integer, ret As String
+
+        txtCodeOutput.Text = ""
+        DebugOut("Compiling project '" + MyProject.ProjectName + "'...")
+
+        rt = MyProject.SetCDS(MyFile, SyntaxView1.TxtSource)
+        If rt < 0 Then DebugOut("Error: Project file '" + MyFile + "' doesn't exist")
+
+        ReDim fileDatas(MyProject.CDSCount)
+        ReDim fileNames(MyProject.CDSCount)
+
+        For i = 0 To MyProject.CDSCount
+            fileNames(i) = MyProject.CDS(i).FileName
+            fileDatas(i) = MyProject.CDS(i).FileData
+        Next
+
+        rt = mpCom.CompileProject(fileNames, fileDatas, ret)
+        If rt < 0 Then
+            DebugOut("Compiler Error!")
+            HandleError(1)
+        Else
+            'txtCodeOutput.Text = ret
+
+
+            Dim Addrs() As UInt32, Datas() As UInt32, sp() As String, Lines() As String, b As Integer
+
+            DebugOut("Compile completed.")
+            If ret = "" Then Exit Sub
+            If ret = vbCrLf Then Exit Sub
+
+            ReDim Addrs(0)
+            ReDim Datas(0)
+            b = -1
+            Lines = Split(ret + vbCrLf, vbCrLf)
+            For i = 0 To Lines.Count - 1
+                sp = Split(Lines(i) + " ", " ")
+                If sp(1) <> "" Then
+                    b += 1
+                    ReDim Preserve Addrs(b)
+                    ReDim Preserve Datas(b)
+                    Addrs(b) = Convert.ToUInt32(Strings.Right(sp(0), 7), 16)
+                    Datas(b) = Convert.ToUInt32(sp(1), 16)
+                End If
+            Next
+
+
+            Dim EMU As New frmEmulator
+            EMU.Show()
+            EMU.SetAsm(mpAsm, mpCom)
+
+            EMU.SetCode(Addrs, Datas)
+        End If
+
+        GC.Collect()
+    End Sub
+
+    Private Sub SyntaxView1_Load(sender As Object, e As EventArgs) Handles SyntaxView1.Load
+
+    End Sub
+
+    Private Sub ManageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ManageToolStripMenuItem.Click
+
     End Sub
 
     Private Sub PS2ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PS2ToolStripMenuItem.Click

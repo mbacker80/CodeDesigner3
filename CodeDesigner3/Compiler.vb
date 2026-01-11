@@ -6,11 +6,12 @@
     Private FuncsAndSubs() As AsmFunction, FnScount As Integer
     Private BraceScopes() As BraceScope, ScopeCount As Integer
     Private Footer() As FooterCode, FooterCount As Integer
-    Dim FThreads() As FuncThread, ThreadCount As Integer
+    Private FThreads() As FuncThread, ThreadCount As Integer
 
     Private CodeFormat As String
     Private ifsCount As Integer, switchesCount As Integer
 
+    Public ElfCfg As ELF_Config
 
     '----------------------------------------------- General Errors
     Private Const SyntaxError_UnknownInstruction = -1
@@ -90,6 +91,19 @@
         Dim LineNumber As Integer
         Dim LineData As String
         Dim ExtraDetails As String
+    End Structure
+
+    Public Structure ELF_Config
+        Dim Entry As UInt32
+        Dim Main As UInt32
+        Dim StackSize As UInt32
+        Dim ResourceCount As Int32
+        Dim Resources() As ELF_Resource
+        Dim ResPath As String
+    End Structure
+    Public Structure ELF_Resource
+        Dim Offset As UInt32
+        Dim Data() As Byte
     End Structure
 
     Private Function CreateError(PGName As String, ErrNum As Integer, LineNum As Integer,
@@ -394,6 +408,12 @@ updateFunc:
 
         MemAddr = 0
 
+        ElfCfg.ResPath = ""
+        ElfCfg.ResourceCount = -1
+        ReDim ElfCfg.Resources(0)
+        ElfCfg.Entry = 0
+        ElfCfg.StackSize = 0
+
         ClearFooter()
         ClearLabels()
         ClearFuncs()
@@ -465,6 +485,11 @@ updateFunc:
         Dim PageData As String, SILData As String
 
         If isProj = False Then
+            ElfCfg.ResPath = ""
+            ElfCfg.ResourceCount = -1
+            ReDim ElfCfg.Resources(0)
+            ElfCfg.Entry = 0
+            ElfCfg.StackSize = 0
             ClearThreads()
             SILData = SingleImportLibrary(Src)
             PageData = Src + SILData
@@ -472,7 +497,7 @@ updateFunc:
                 Return ErrDetail.ErrorNumber
             End If
         Else
-                PageData = Src
+            PageData = Src
         End If
 
         fncScan = True
@@ -501,6 +526,14 @@ fncScanCompleteRestart:
 
 compileFooter:
         For I = 0 To Lines.Count - 2
+            For i2 = 0 To ElfCfg.ResourceCount
+                If MemAddr = ElfCfg.Resources(i2).Offset Then
+                    MemAddr += ElfCfg.Resources(i2).Data.Length + 4
+                    While ((MemAddr And 3) <> 0)
+                        MemAddr += 1
+                    End While
+                End If
+            Next
 
             If Strings.Left(Lines(I), 2) = "/*" Then isInComments = True
             If isInComments = True Then GoTo skipBlank
@@ -518,6 +551,77 @@ compileFooter:
             End If
 
             Select Case LCase(sp(0))
+                Case "elf.entry"
+                    If Strings.Left(sp(1), 1) = ":" Then
+                        LabeledToCodeArray(CodeOutput, MemAddr, "elf.entry " + sp(1) + "   " + I.ToString, 0)
+                    Else
+                        ElfCfg.Entry = GetVal(sp(1))
+                    End If
+                Case "resource.path"
+                    tStr = Lines(I) + """"""
+                    sp2 = Split(tStr, """")
+                    sp3 = Split(sp2(1), """")
+                    If Strings.Right(sp3(0), 1) <> "\" Then sp3(0) += "\"
+                    If sp3(0) = "\" Then sp3(0) = ""
+                    ElfCfg.ResPath = sp3(0)
+                    debugOut("Changing resource path to '" + sp3(0) + "'")
+                Case "resource"
+                    tStr = Lines(I) + """"""
+                    sp2 = Split(tStr, """")
+                    sp3 = Split(sp2(1), """")
+                    If sp3(0) = "" Then Return CreateError("", SyntaxError_BadStringDefinition, I, Lines(I), "Resources must have a valid file path")
+                    If sp(2) = "" Then Return CreateError("", SyntaxError_BadLabelDefinition, I, Lines(I), "Resource must be given a name for usage")
+                    tStr = sp3(0)
+
+                    While ((MemAddr And 15) <> 0) 'Align to quad word
+                        MemAddr += 4
+                    End While
+
+
+                    If sp(1) = "%here" Then
+                        ElfCfg.ResourceCount += 1
+                        ReDim Preserve ElfCfg.Resources(ElfCfg.ResourceCount)
+                        While ((MemAddr And 15) <> 0)
+                            MemAddr += 4
+                        End While
+                        With ElfCfg.Resources(ElfCfg.ResourceCount)
+                            Try
+                                .Data = System.IO.File.ReadAllBytes(ElfCfg.ResPath + tStr)
+                            Catch
+                                Return CreateError("", SyntaxError_BadStringDefinition, I, Lines(I), "File I/O Error with '" + tStr + "'")
+                            End Try
+                            .Offset = MemAddr
+                            debugOut("Resource '" + tStr + "' loaded to " + .Offset.ToString("X8"))
+                        End With
+                        MemAddr += ElfCfg.Resources(ElfCfg.ResourceCount).Data.Length + 4
+                        While ((MemAddr And 3) <> 0)
+                            MemAddr += 1
+                        End While
+                        AddLabel(sp(2), ElfCfg.Resources(ElfCfg.ResourceCount).Offset)
+                        debugOut("Notice: Resources will only be exported in .ELF and .RAW formats, will not display as a code due to potential excess size")
+                    ElseIf sp(1) = "%append" Then
+                        tStr2 = "resource %here " + sp(2) + """" + tStr + """"
+                        AddFooter("", I, "memalign quad", "")
+                        AddFooter("", I, tStr2, sp(2))
+                    Else
+                        If Strings.Left(sp(1), 1) = ":" Then
+                            Return CreateError("", SyntaxError_BadLabelDefinition, I, Lines(I), "Dynamic resource placement not supported yet")
+                        Else
+                            ElfCfg.ResourceCount += 1
+                            ReDim Preserve ElfCfg.Resources(ElfCfg.ResourceCount)
+                            With ElfCfg.Resources(ElfCfg.ResourceCount)
+                                Try
+                                    .Data = System.IO.File.ReadAllBytes(ElfCfg.ResPath + tStr)
+                                Catch
+                                    Return CreateError("", SyntaxError_BadStringDefinition, I, Lines(I), "File I/O Error with '" + tStr + "'")
+                                End Try
+                                .Offset = GetVal(sp(1))
+                                debugOut("Resource '" + tStr + "' loaded to " + .Offset.ToString("X8"))
+                            End With
+                            AddLabel(sp(2), ElfCfg.Resources(ElfCfg.ResourceCount).Offset)
+                        End If
+                        debugOut("Notice: Resources will only be exported in .ELF and .RAW formats, will not display as a code due to potential excess size")
+                    End If
                 Case "alloc"
                     If sp(1) = "" Then Return CreateError("", SyntaxError_BadLabelDefinition, I, Lines(I), "Must have a name for the allocated space")
                     If sp(2) = "" Then Return CreateError("", SyntaxError_BadLabelDefinition, I, Lines(I), "Memory allocation requires a size")
@@ -535,9 +639,22 @@ compileFooter:
                 Case "memalign"
                     sp(1) = LCase(sp(1))
                     If sp(1) = "double" Then
-                        If (MemAddr And 7) <> 0 Then MemAddr = ((MemAddr \ 8) * 8) + 8
+                        While ((MemAddr And 7) <> 0)
+                            'FormatToCodeArray(CodeOutput, MemAddr, 0)
+                            MemAddr += 4
+                        End While
+                        'If (MemAddr And 7) <> 0 Then
+                        '    MemAddr = ((MemAddr \ 8) * 8) + 8
+                        'End If
                     ElseIf sp(1) = "quad" Then
-                        If (MemAddr And 15) <> 0 Then MemAddr = ((MemAddr \ 16) * 16) + 16
+                        While ((MemAddr And 15) <> 0)
+                            'FormatToCodeArray(CodeOutput, MemAddr, 0)
+                            MemAddr += 4
+                        End While
+                        'If (MemAddr And 15) <> 0 Then
+                        'MemAddr = ((MemAddr \ 16) * 16) + 16
+                        'End If
+
                     End If
                 Case "thread"
                 Case "prochook"
@@ -702,7 +819,14 @@ compileFooter:
                     MemAddr += ((Val(Replace(sp(1), "$", "&H0")) \ 4) * 4) + 4
                     GoTo skipBlank
                 Case "define"
-                    rt = AddLabel(Replace(sp(1), ":", ""), Val(Replace(sp(2), "$", "&H0")))
+                    Dim u32 As UInt32
+                    u32 = GetVal(sp(2))
+                    If u32 > &H7FFFFFFF Then
+                        i2 = 0 - (&H100000000 - u32)
+                    Else
+                        i2 = u32
+                    End If
+                    rt = AddLabel(Replace(sp(1), ":", ""), i2)
                     If rt < 0 Then Return CreateError("", SyntaxError_BadLabelDefinition, I, Lines(I), "")
 
                     GoTo skipBlank
@@ -710,7 +834,7 @@ compileFooter:
                     If Strings.Left(sp(1), 1) = ":" Then
                         LabeledToCodeArray(CodeOutput, MemAddr, sp(0) + " " + sp(1) + "   " + I.ToString, 4)
                     Else
-                        FormatToCodeArray(CodeOutput, MemAddr, CDec(Replace(sp(1), "$", "&H0")))
+                        FormatToCodeArray(CodeOutput, MemAddr, GetVal(sp(1))) 'CDec(Replace(sp(1), "$", "&H0")))
                     End If
                 Case "hexfloat"
                     If Strings.Left(sp(1), 1) = ":" Then
@@ -1049,7 +1173,7 @@ fScanFunc:
                                         End If
                                         tmpI2 += 1
                                     Next
-                                ElseIf lcase(sp2(i2)) = "cop1-all" Then
+                                ElseIf LCase(sp2(i2)) = "cop1-all" Then
                                     Dim tmpI As Integer
                                     ReDim fncPreserves(31)
                                     ReDim fncPreserves(31)
@@ -1087,7 +1211,6 @@ fScanFunc:
                                 .Preserves(i2 + 1) = fncPreserves(i2)
                                 .Restores(i2) = fncRestores(i2)
 
-                                Console.WriteLine(fncPreserves(i2))
                                 rt = mpAsm.AssembleInstruction(fncPreserves(i2), CodeRet)
                                 If rt < 0 Then Return CreateError("", SyntaxError_BadArgumentType, I, Lines(I), "Unknown reason for being here")
                                 FormatToCodeArray(CodeOutput, MemAddr, CodeRet)
@@ -2255,6 +2378,12 @@ skipBlank:
                 MemAddr = Val("&H" + Strings.Left(CodeOutput(I), 8))
 
                 Select Case sp(0)
+                    Case "elf.entry"
+                        If Strings.Left(sp(1), 1) = ":" Then sp(1) = Strings.Right(sp(1), Len(sp(1)) - 1)
+                        rt = GetLabel(sp(1), i2)
+                        If rt < 0 Then GoTo LabelNotFound
+                        ElfCfg.Entry = i2
+                        CodeOutput(I) = ""
                     Case "hook"
                         'hook %me $00100000 -j
                         'hook labelname $00100000 -jal
@@ -2685,7 +2814,16 @@ restartGathering:
         Return ret
     End Function
 
-
+    Private Function GetVal(strIn As String) As UInt32
+        Dim I As Int64
+        I = CDec(Replace(strIn, "$", "&H0"))
+        If I < 0 Then
+            I = &H100000000 - (0 - I)
+            Return I And 4294967295
+        Else
+            Return I And 4294967295
+        End If
+    End Function
 
 
     Private Function parseSyntax(strIn As String) As String

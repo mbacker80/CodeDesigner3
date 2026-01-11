@@ -247,9 +247,13 @@
                     Case "target"
                         Sp(I + 1) = Replace(Sp(I + 1), "$", "&h0")
                         Sp(I + 1) = Replace(Sp(I + 1), "0x", "&h0")
-                        assemblerStruct.target(CDec(Sp(I + 1)))
+                        Try
+                            assemblerStruct.target(CDec(Sp(I + 1)))
+                        Catch
+                            Return -6 'Invalid Argument
+                        End Try
                     Case "%d"
-                        Sp(I + 1) = Replace(Sp(I + 1), "$", "")
+                            Sp(I + 1) = Replace(Sp(I + 1), "$", "")
                         Sp(I + 1) = Replace(Sp(I + 1), "0x", "")
                         If Sp(0) = "syscall" Then
                             assemblerStruct.u32 = (assemblerStruct.u32 And 4227858495) Or ((Val("&H" + Sp(I + 1)) And 1048575) << 6)
@@ -730,7 +734,6 @@ restartScan:
                     Next i3
                     HEXMask = Right("00000000" + Hex(BinToDec(HEXMask + tmp)), 8)
                     divBy = (2 ^ shiftBy)
-
                     If UsesArg(ArgBits(1), mipsOps(I).Arguments) Then
                         ReDim Preserve mipsOps(I).ArgMasks(useI)
                         .ArgMasks(useI).Maskhex = HEXMask

@@ -166,6 +166,10 @@ readFailed:
         SetConfig("SVCOM:thread.wakeup", "FFff00ff",, "{b}")
         SetConfig("SVCOM:event", "FFff00ff",, "{b}")
 
+        SetConfig("SVCOM:elf.entry", "FFff00ff",, "{b}")
+        SetConfig("SVCOM:resource", "FFff00ff",, "{b}")
+        SetConfig("SVCOM:resource.path", "FFff00ff",, "{b}")
+
         SetConfig("SVCOM:import", "FFff00ff",, "{b}")
 
         SetConfig("SVCOM:if", "FFff00ff",, "{b}")
